@@ -40,7 +40,6 @@ def main(args=None):
         end = args.interval[1]
         shot_files = shot_files[start:end]
 
-    import ipdb; ipdb.set_trace()
     shots = []
     for f in tqdm.tqdm(shot_files, desc="Loading shots to RAM..."):
         frame = cv2.imread(os.path.join(args.experiment_folder, f))
