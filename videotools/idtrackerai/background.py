@@ -12,6 +12,7 @@ def get_parser():
     ap = argparse.ArgumentParser()
     ap.add_argument("--experiment-folder", dest="experiment_folder", required=True)
     ap.add_argument("--output", required=True)
+    ap.add_argument("--interval", type=int, nargs="+", required=False, default=None)
     ap.add_argument("--ROI", dest="roi", required=False)
     return ap
 
@@ -34,6 +35,12 @@ def main(args=None):
         raise Exception("No shot files found!")
 
 
+    if not args.interval is None:
+        start = args.interval[0]
+        end = args.interval[1]
+        shot_files = shot_files[start:end]
+
+    import ipdb; ipdb.set_trace()
     shots = []
     for f in tqdm.tqdm(shot_files, desc="Loading shots to RAM..."):
         frame = cv2.imread(os.path.join(args.experiment_folder, f))
